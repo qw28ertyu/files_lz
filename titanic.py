@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt  # для создания графика
 import pandas as pd  # для работы с таблицами
 
-df = pd.read_parquet('titanic.parquet')  # читаем данные
-df.to_csv('titanic.csv', index=False)  # переделываем код в csv
-df = pd.read_csv('titanic.csv')  # читаем csv файл
+titanic_df = pd.read_parquet('titanic.parquet')  # читаем данные
+titanic_df.to_csv('titanic.csv', index=False)  # переделываем код в csv
+titanic_df = pd.read_csv('titanic.csv')  # читаем csv файл
 
-a = df.groupby(['Pclass', 'Survived']).size().unstack(fill_value=0)  # переделываем данные в таблицу
+survival_table = titanic_df.groupby(['Pclass', 'Survived']).size().unstack(fill_value=0)  # переделываем данные в таблицу
 
-a.plot(kind='bar', stacked=True)  # строим гистограмму с объединенными столбцами
+survival_table.plot(kind='bar', stacked=True)  # строим гистограмму с объединенными столбцами
 
 plt.title('Выживаемость пассажиров Титаника')  # заголовок
 plt.xlabel('Класс билета')  # подпись оси x
